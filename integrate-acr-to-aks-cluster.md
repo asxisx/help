@@ -31,3 +31,7 @@ az login
 az acr login --name <name-of-the-acr>
 docker image tag <image-name> <ac-name>.azure.io/<location>:v1
 docker push <image-name> <ac-name>.azure.io/<location>:v1
+```
+
+### Other Useful Links
+[3 Ways to integrate ACR with AKS](https://www.thorsten-hans.com/3-ways-to-integrate-acr-with-aks)
