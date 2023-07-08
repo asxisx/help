@@ -50,3 +50,9 @@ az account show
 ```Powershell
 az account set -s <subscription-id-or-name>
 ```
+---
+## [For Linux](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt)
+
+```Bash
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+```
