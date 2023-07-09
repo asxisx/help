@@ -17,3 +17,9 @@ openssl req -new -out server.csr -key server.key
 openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 360
 ```
 
+## View an openssl ca.crt
+
+```bash
+openssl x509 -noout -text -in ca.crt
+```
+
