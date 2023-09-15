@@ -12,3 +12,5 @@ Export-Certificate -Cert $Certificate -FilePath $DocumentsFolder\$CertificateNam
  
 #Export the PFX File
 Export-PfxCertificate -Cert $Certificate -FilePath "$DocumentsFolder\$CertificateName.pfx" -Password (ConvertTo-SecureString -String $CertificatePassword -Force -AsPlainText)
+
+# https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-self-signed-certificate
