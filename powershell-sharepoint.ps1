@@ -28,3 +28,27 @@ Get-PnPSite
 
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+# Download the whole folder from Sharepoint Site to your local location.
+
+#Set Parameters
+$SiteURL = "https://global.sharepoint.com"
+$ClientID = ""
+$ThumbPrint = ""
+$Tenant = "global.com"
+# $TenantSiteURL = "https://globalgeninvo.sharepoint.com"
+$SiteRelativeURL = "/sites/test/Shared%20Documents"
+$LibraryName = "test1509"
+$DownloadPath ="C:\temp\"
+ 
+#Connect to PnP Online as Virtual Drive "SPO:\"
+Connect-PnPOnline -Url $SiteURL -ClientId $ClientID -Thumbprint $ThumbPrint -Tenant $Tenant -CreateDrive
+# Connect-PnPOnline -Url $TenantSiteURL -CreateDrive -Credentials (Get-Credential)
+ 
+#Change the Path and navigate to the source site
+Set-Location -Path SPO:\$SiteRelativeURL
+ 
+#Download Document Library to Local Drive
+Copy-PnpItemProxy -Recurse -Force $LibraryName $DownloadPath
+
+
+#Read more: https://www.sharepointdiary.com/2017/03/sharepoint-online-download-all-files-from-document-library-using-powershell.html#ixzz8DOFZdTAv
