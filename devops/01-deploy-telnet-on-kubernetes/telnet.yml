@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telnet
+  namespace: temp # change as per need
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: telnet
+  template:
+    metadata:
+      labels:
+        app: telnet
+    spec:
+      containers:
+      - name: telnet
+        image: telnet # you can also paste the image link as per your needs
+        command: ["telnet", "10.1.1.190", "27017"]
+        ports:
+        - containerPort: 23
