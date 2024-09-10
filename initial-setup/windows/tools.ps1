@@ -49,4 +49,16 @@ winget install --id 9NKSQGP7F2NH --source msstore
 # Obsidian
 winget install --id Obsidian.Obsidian --source winget
 
+# Brave
+winget install --id Brave.Brave --source winget
+
+# Anaconda
+winget install --id Brave.Brave --source winget
+
+# Python
+winget install --id Python.Python.3.12 --source winget
+
+# TradingView
+winget install --id Tradingview.TradingViewDesktop --source winget
+
 
