@@ -35,6 +35,7 @@ winget install --id Spotify.Spotify --source winget
 winget install Hashicorp.Terraform --source winget
 
 # Azure CLI
+winget install -e --id Microsoft.AzureCLI
 $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; Remove-Item .\AzureCLI.msi
 
 # Putty
