@@ -1,5 +1,4 @@
 # PowerShell 7
-Install-Module -Name Az -Repository PSGallery -Force
 winget install --id Microsoft.PowerShell --source winget
 
 # Azure PowerShell
@@ -39,7 +38,7 @@ winget install -e --id Microsoft.AzureCLI
 $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; Remove-Item .\AzureCLI.msi
 
 # Putty
-winget install Hashicorp.Terraform --source winget
+winget install Putty.Putty --source winget
 
 # MobaXterm
 winget install Mobatek.MobaXterm --source winget
@@ -54,12 +53,15 @@ winget install --id Obsidian.Obsidian --source winget
 winget install --id Brave.Brave --source winget
 
 # Anaconda
-winget install --id Brave.Brave --source winget
+winget install --id Anaconda.Anaconda3 --source winget
 
 # Python
 winget install --id Python.Python.3.12 --source winget
 
 # TradingView
 winget install --id Tradingview.TradingViewDesktop --source winget
+
+# Oracle VirtualBox
+winget install Oracle.VirtualBox --source winget
 
 
