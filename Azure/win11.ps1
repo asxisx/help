@@ -1,44 +1,40 @@
-# Variables
-$resourceGroup = "MyResourceGroup"
-$location = "EastUS"
+# Variables — replace these with your values
+$resourceGroup = "YourResourceGroupName"
+$location = "eastus"  # or your region
 $vmName = "Win11VM"
-$vmSize = "Standard_D2s_v3"
-$virtualNetworkName = "$vmName-VNet"
-$subnetName = "$vmName-Subnet"
-$ipName = "$vmName-IP"
-$nicName = "$vmName-NIC"
+$virtualNetworkName = "YourVNetName"
+$subnetName = "YourSubnetName"
 $adminUsername = "azureuser"
 $adminPassword = ConvertTo-SecureString "YourStrongPassword123!" -AsPlainText -Force
+$vmSize = "Standard_D2s_v3"  # or your preferred size
+$ipName = "$vmName-ip"
+$nicName = "$vmName-nic"
+$diskName = "$vmName-osdisk"
 
-# Create resource group (if it doesn't exist)
-if (-not (Get-AzResourceGroup -Name $resourceGroup -ErrorAction SilentlyContinue)) {
-    New-AzResourceGroup -Name $resourceGroup -Location $location
-}
+# Login to Azure (if not already)
+Connect-AzAccount
 
-# Create virtual network and subnet
-$vnet = New-AzVirtualNetwork -ResourceGroupName $resourceGroup -Location $location `
-    -Name $virtualNetworkName -AddressPrefix "10.0.0.0/16"
-Add-AzVirtualNetworkSubnetConfig -Name $subnetName -AddressPrefix "10.0.0.0/24" -VirtualNetwork $vnet
-$vnet | Set-AzVirtualNetwork
+# Get existing VNet and subnet
+$vnet = Get-AzVirtualNetwork -Name $virtualNetworkName -ResourceGroupName $resourceGroup
+$subnet = Get-AzVirtualNetworkSubnetConfig -Name $subnetName -VirtualNetwork $vnet
 
 # Create public IP
-$pip = New-AzPublicIpAddress -ResourceGroupName $resourceGroup -Location $location `
-    -Name $ipName -AllocationMethod Dynamic
+$publicIp = New-AzPublicIpAddress -Name $ipName -ResourceGroupName $resourceGroup `
+    -Location $location -AllocationMethod Dynamic
 
 # Create NIC
-$subnet = Get-AzVirtualNetworkSubnetConfig -Name $subnetName -VirtualNetwork $vnet
-$nic = New-AzNetworkInterface -ResourceGroupName $resourceGroup -Location $location `
-    -Name $nicName -SubnetId $subnet.Id -PublicIpAddressId $pip.Id
+$nic = New-AzNetworkInterface -Name $nicName -ResourceGroupName $resourceGroup `
+    -Location $location -SubnetId $subnet.Id -PublicIpAddressId $publicIp.Id
 
-# Define Windows 11 image reference
-$win11Image = Get-AzVMImage -Location $location -PublisherName "MicrosoftWindowsDesktop" `
-    -Offer "windows-11" -Skus "win11-22h2-pro" | Select-Object -First 1
+# Get latest Windows 11 image
+$win11Image = Get-AzVMImageSku -Location $location -PublisherName "MicrosoftWindowsDesktop" `
+    -Offer "windows-11" | Where-Object {$_.Skus -like "win11-22h2-pro"} | Select-Object -First 1
 
-# Create VM config
-$vmConfig = New-AzVMConfig -VMName $vmName -VMSize $vmSize |
-    Set-AzVMOperatingSystem -Windows -ComputerName $vmName -Credential (New-Object System.Management.Automation.PSCredential($adminUsername, $adminPassword)) -ProvisionVMAgent -EnableAutoUpdate |
-    Set-AzVMSourceImage -PublisherName $win11Image.PublisherName -Offer $win11Image.Offer -Skus $win11Image.Skus -Version "latest" |
+# Configure VM
+$vmConfig = New-AzVMConfig -VMName $vmName -VMSize $vmSize | `
+    Set-AzVMOperatingSystem -Windows -ComputerName $vmName -Credential (New-Object PSCredential ($adminUsername, $adminPassword)) -ProvisionVMAgent -EnableAutoUpdate | `
+    Set-AzVMSourceImage -PublisherName "MicrosoftWindowsDesktop" -Offer "windows-11" -Skus $win11Image.Skus -Version "latest" | `
     Add-AzVMNetworkInterface -Id $nic.Id
 
-# Create the VM
+# Create VM
 New-AzVM -ResourceGroupName $resourceGroup -Location $location -VM $vmConfig
