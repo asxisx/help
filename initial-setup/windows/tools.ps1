@@ -2,9 +2,10 @@
 winget install --id Microsoft.PowerShell --source winget
 
 # Azure PowerShell
-Get-ExecutionPolicy -List
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-Install-Module -Name Az -Repository PSGallery -Force
+# Run this with Admin Powershell
+#Get-ExecutionPolicy -List
+#Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+#Install-Module -Name Az -Repository PSGallery -Force
 
 # Curl
 winget install --id curl.curl --source winget
@@ -64,4 +65,8 @@ winget install --id Tradingview.TradingViewDesktop --source winget
 # Oracle VirtualBox
 winget install Oracle.VirtualBox --source winget
 
+# Microsoft Teams
+winget install Microsoft.Teams --source winget
 
+# Git
+winget install Git.Git --source winget
