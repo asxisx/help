@@ -70,3 +70,6 @@ winget install Microsoft.Teams --source winget
 
 # Git
 winget install Git.Git --source winget
+
+# Podman Desktop
+winget install Redhat.Podman-Desktop --source winget
