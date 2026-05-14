@@ -82,3 +82,6 @@ winget install Tailscale.Tailscale --source winget
 
 # Podman Desktop
 winget install Redhat.Podman-Desktop --source winget
+
+# nvm-windows
+winget install CoreyButler.NVMforWindows --source winget
