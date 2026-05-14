@@ -97,3 +97,9 @@ winget install Vivaldi.Vivaldi --source winget
 
 # Bruno
 winget install Bruno.Bruno --source winget
+
+# Install Terminus
+# Login to account and download manually
+
+# Office (Expect Prompt)
+winget install Microsoft.Office --source winget
