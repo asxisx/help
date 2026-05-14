@@ -85,3 +85,15 @@ winget install Redhat.Podman-Desktop --source winget
 
 # nvm-windows
 winget install CoreyButler.NVMforWindows --source winget
+
+# k9s
+winget install Derailed.k9s --source winget
+
+# Lens Desktop
+#https://lenshq.io/download
+
+# Vivaldi
+winget install Vivaldi.Vivaldi --source winget
+
+# Bruno
+winget install Bruno.Bruno --source winget
