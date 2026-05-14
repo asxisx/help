@@ -74,5 +74,11 @@ winget install Git.Git --source winget
 # Podman
 winget install Redhat.Podman --source winget
 
+# Kiro
+irm 'https://cli.kiro.dev/install.ps1' | iex
+
+# TailScale
+winget install Tailscale.Tailscale --source winget
+
 # Podman Desktop
 winget install Redhat.Podman-Desktop --source winget
